@@ -7,7 +7,7 @@ php: 8.1
 laravel: 10
 
 
-Usuário default para autenticação do JWT após rodar as seeders
+Usuário default para autenticação do JWT após rodar as seeds
 
 email: RuanAdmin@gmail.com
 password: password
