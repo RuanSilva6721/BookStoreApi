@@ -29,7 +29,6 @@ Depois de clonar, acesse o repositório e instale as dependências com os comand
 
 ```bash
 
-cd api-appliance
 composer install
 ```
 
@@ -174,11 +173,11 @@ php artisan db:seed & php artisan db:seed --class=BookStoreSeeder
 
 1. Acesse a rota de login com o email e senha, em seguida, pegue o token que é retornado na resposta.
 
-![Login](https://chat.openai.com/BookStoreApi/public/ImdReame/login.png) 
+![Login](./public/ImdReame/login.png) 
 
 1. Para utilizar as rotas autenticadas, inclua o token no cabeçalho das requisições. É importante adicionar o prefixo 'Bearer' antes do token, como mostrado na imagem abaixo:
 
-![Header](https://chat.openai.com/BookStoreApi/public/ImdReame/get.png) 
+![Header](./public/ImdReame/get.png) 
 
 ## Construído com 
 - [Laravel](https://laravel.com/)
