@@ -22,8 +22,8 @@ Route::middleware('auth:sanctum')->get('/users', function(Request $request){
 });
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::get('/BookStore', [BookStoreController::class, 'getBookStoreAll']);
-Route::get('/BookStore/{id}', [BookStoreController::class, 'getBookStoreOne']);
-Route::post('/BookStoreCreate', [BookStoreController::class, 'createBookStore']);
-Route::put('/BookStore/{id}', [BookStoreController::class, 'editBookStore']);
-Route::delete('/BookStore/{id}', [BookStoreController::class, 'deleteBookStore']);
+Route::middleware('auth:sanctum')->get('/BookStore', [BookStoreController::class, 'getBookStoreAll']);
+Route::middleware('auth:sanctum')->get('/BookStore/{id}', [BookStoreController::class, 'getBookStoreOne']);
+Route::middleware('auth:sanctum')->post('/BookStoreCreate', [BookStoreController::class, 'createBookStore']);
+Route::middleware('auth:sanctum')->put('/BookStore/{id}', [BookStoreController::class, 'editBookStore']);
+Route::middleware('auth:sanctum')->delete('/BookStore/{id}', [BookStoreController::class, 'deleteBookStore']);

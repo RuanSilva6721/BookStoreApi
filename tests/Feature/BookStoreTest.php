@@ -1,31 +1,37 @@
 <?php
 
-use App\Models\Brand;
-use App\Models\Product;
+namespace Tests\Feature;
+
+use App\Models\BookStore;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-
-class ProductTest extends TestCase
+class BookStoreTest extends TestCase
 {
-    protected string $endpoint = '/api/applianceProduct';
+    protected string $endpoint = '/api/BookStore';
 
     use RefreshDatabase;
 
+    protected $user;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+    
+        $this->user = User::factory()->create();
+    }
     public function test_create_product()
     {
-        Brand::factory(10)->create();
+        $this->actingAs($this->user);
 
-        $brand =Brand::first();
         $payload = [
-            'name' => 'accusamus',
-            'description' => 'Sequi et in est beatae.',
-            'voltage' => '110v',
-            'brand_id' => $brand->id,
+            'name' => 'Ruan Teste',
+            'ISBN' => '532723732',
+            'Value' => 10.99,
         ];
 
         $response = $this->postJson($this->endpoint.'Create', $payload);
@@ -35,50 +41,41 @@ class ProductTest extends TestCase
 
     public function test_find()
     {
-        Brand::factory(10)->create();
+        
+        $this->actingAs($this->user);
+        $bookStore = BookStore::factory()->create();
 
-        $product = Product::factory()->create();
-
-        $response = $this->getJson("{$this->endpoint}/{$product->id}");
+        $response = $this->getJson("{$this->endpoint}/{$bookStore->id}");
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure([
     
                 'id',
                 'name',
-                'description',
-                'voltage',
-                'brand_id',
+                'ISBN',
+                'Value',
                 'created_at',
                 'updated_at'
             
         ]);
     }
 
-    // public function test_find_not_found()
-    // {
-    //     $response = $this->getJson("{$this->endpoint}/fake_id");
-
-    //     $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
-    // }
-
     public function test_update()
     {
+        $this->actingAs($this->user);
 
         DB::beginTransaction();
-         Brand::factory(10)->create();
 
         try {
-            $product = Product::factory()->create();
+            $bookStore = BookStore::factory()->create();
 
             $payload = [
                 'name' => 'Updated Product',
-                'description' => 'This is the updated product',
-                'voltage' => '220v',
-                'brand_id' => $product->brand_id
+                'ISBN' => '000000',
+                'Value' => 11.99,
             ];
 
-            $response = $this->putJson("{$this->endpoint}/{$product->id}", $payload);
+            $response = $this->putJson("{$this->endpoint}/{$bookStore->id}", $payload);
 
             $response->assertStatus(Response::HTTP_OK);
 
@@ -91,6 +88,7 @@ class ProductTest extends TestCase
 
     public function test_update_not_found()
     {
+        $this->actingAs($this->user);
         $response = $this->putJson("{$this->endpoint}/fake_id", [
             'name' => 'Updated Product'
         ]);
@@ -100,6 +98,7 @@ class ProductTest extends TestCase
 
     public function test_delete_not_found()
     {
+        $this->actingAs($this->user);
         $response = $this->deleteJson("{$this->endpoint}/fake_id");
 
         $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -107,10 +106,10 @@ class ProductTest extends TestCase
 
     public function test_delete()
     {
-        Brand::factory(10)->create();
-        $product = Product::factory()->create();
+        $this->actingAs($this->user);
+        $bookStore = BookStore::factory()->create();
 
-        $response = $this->deleteJson("{$this->endpoint}/{$product->id}");
+        $response = $this->deleteJson("{$this->endpoint}/{$bookStore->id}");
 
         $response->assertNoContent();
     }

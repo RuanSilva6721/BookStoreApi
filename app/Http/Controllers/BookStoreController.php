@@ -101,18 +101,9 @@ class BookStoreController extends Controller
     public function deleteBookStore($id)
     {
         try {
-            $result = $this->BookStoreService->deleteBookStore($id);
-            if ($result) {
-                return new JsonResponse([
-                    'success' => true,
-                    'message' => 'Livro excluída com sucesso.'
-                ], 204);
-            } else {
-                return new JsonResponse([
-                    'error' => true,
-                    'message' => 'Não foi possível encontrar o Livro para exclusão.'
-                ], 404);
-            }
+            $this->BookStoreService->deleteBookStore($id);
+            return response()->json('Livro excluido com Sucesso!',204);
+ 
         } catch (\Exception $e) {
             $this->logError($e);
             return new JsonResponse([
