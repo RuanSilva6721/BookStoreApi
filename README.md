@@ -5,6 +5,12 @@ Teste em Laravel.
 ```bash
 php: 8.1
 laravel: 10
+
+
+Usuário default para autenticação do JWT após rodar as seeders
+
+email: RuanAdmin@gmail.com
+password: password
 ```
 
 
@@ -14,7 +20,7 @@ Clone o projeto, usando o comando abaixo (usando HTTPS):
 
 ```bash
 
-git clone https://github.com/RuanSilva6721/api-appliance.git
+git clone https://github.com/RuanSilva6721/BookStoreApi.git
 ```
 
 
@@ -67,7 +73,7 @@ Caso queira adicionar dados fictícios para o seu usuário no banco:
 
 ```bash
 
-php artisan db:seed --class=BrandSeeder & php artisan db:seed --class=ProductSeeder
+php artisan db:seed & php artisan db:seed --class=BookStoreSeeder
 ```
 
 
@@ -101,7 +107,7 @@ Você deve mudar a conexão do banco no `.env` para o banco de sua preferência.
 DB_CONNECTION=pgsql
 DB_HOST=db
 DB_PORT=5432
-DB_DATABASE=appliance
+DB_DATABASE=books
 DB_USERNAME=RuanFelipe
 DB_PASSWORD=password
 ```
@@ -133,7 +139,7 @@ Caso queira adicionar dados fictícios para o seu usuário no banco:
 
 ```bash
 
-php artisan db:seed --class=BrandSeeder & php artisan db:seed --class=ProductSeeder
+php artisan db:seed & php artisan db:seed --class=BookStoreSeeder
 ```
 
 
@@ -150,43 +156,12 @@ php artisan test
 
 A API disponibiliza as seguintes rotas:
 
-- `GET /applianceBrand`: Retorna a lista de todas as marcas de eletrodomésticos cadastradas. 
-- `GET /applianceBrand/{id}`: Retorna os detalhes de uma marca de eletrodoméstico específica. 
-- `POST /applianceBrandCreate`: Cria um novo registro de marca de eletrodoméstico. 
-- `PUT /applianceBrand/{id}`: Atualiza uma marca de eletrodoméstico existente. 
-- `DELETE /applianceBrand/{id}`: Remove uma marca de eletrodoméstico existente. 
-- `GET /applianceProduct`: Retorna a lista de todos os produtos de eletrodomésticos cadastrados. 
-- `GET /applianceProduct/{id}`: Retorna os detalhes de um produto de eletrodoméstico específico. 
-- `GET /applianceProductOfBrand/{id}`: Retorna os produtos de eletrodomésticos de uma determinada marca. 
-- `POST /applianceProductCreate`: Cria um novo registro de produto de eletrodoméstico. 
-- `PUT /applianceProduct/{id}`: Atualiza um produto de eletrodoméstico existente. 
-- `DELETE /applianceProduct/{id}`: Remove um produto de eletrodoméstico existente.
+- `GET /api/BookStore`: Retorna a lista de todas os livros cadastrados. 
+- `GET /api/BookStore/{id}`: Retorna os detalhes de um livro de específico. 
+- `POST /api/BookStoreCreate`: Cria um novo registro de livro. 
+- `PUT /api/BookStore/{id}`: Atualiza um livro existente. 
+- `DELETE /api/BookStore/{id}`: Remove um livro existente. 
 
-## Exemplo de Payload de Product
-
-```json
-{
-    "id": 4,
-    "name": "accusamus",
-    "description": "Sequi et in est beatae.",
-    "voltage": "110v",
-    "brand_id": 2,
-    "created_at": "2023-06-17T01:13:32.000000Z",
-    "updated_at": "2023-06-17T01:13:32.000000Z"
-}
-```
-
-## Exemplo de Payload de Brand
-
-```json
-{
-    "id": 4,
-    "name": "Philips",
-    "icon": "movie",
-    "created_at": "2023-06-17T01:13:06.000000Z",
-    "updated_at": "2023-06-17T01:13:06.000000Z"
-}
-```
 ## Construído com 
 - [Laravel](https://laravel.com/)
 # BookStoreApi

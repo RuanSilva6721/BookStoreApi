@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::middleware('auth:sanctum')->get('/users', function(Request $request){
-    return $request->user();
-});
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->get('/BookStore', [BookStoreController::class, 'getBookStoreAll']);
