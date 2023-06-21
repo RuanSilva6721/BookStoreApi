@@ -1,4 +1,4 @@
-# API Appliance
+# API BookStore
 
 Teste em Laravel.
 
@@ -69,7 +69,7 @@ php artisan serve
 
 Para ver o projeto em execução, acesse [http://localhost:8000](http://localhost:8000/) .
 
-Caso queira adicionar dados fictícios para o seu usuário no banco:
+Caso queira adicionar dados fictícios:
 
 ```bash
 
@@ -135,7 +135,7 @@ php artisan migrate
 ```
 
 
-Caso queira adicionar dados fictícios para o seu usuário no banco:
+Caso queira adicionar dados fictícios:
 
 ```bash
 
@@ -161,6 +161,24 @@ A API disponibiliza as seguintes rotas:
 - `POST /api/BookStoreCreate`: Cria um novo registro de livro. 
 - `PUT /api/BookStore/{id}`: Atualiza um livro existente. 
 - `DELETE /api/BookStore/{id}`: Remove um livro existente. 
+
+
+**Como fazer a Autenticação:** 
+1. Rode o seguinte comando para adicionar dados fictícios ao banco de dados:
+
+```bash
+
+php artisan db:seed & php artisan db:seed --class=BookStoreSeeder
+```
+
+
+1. Acesse a rota de login com o email e senha, em seguida, pegue o token que é retornado na resposta.
+
+![Login](https://chat.openai.com/BookStoreApi/public/ImdReame/login.png) 
+
+1. Para utilizar as rotas autenticadas, inclua o token no cabeçalho das requisições. É importante adicionar o prefixo 'Bearer' antes do token, como mostrado na imagem abaixo:
+
+![Header](https://chat.openai.com/BookStoreApi/public/ImdReame/get.png) 
 
 ## Construído com 
 - [Laravel](https://laravel.com/)
